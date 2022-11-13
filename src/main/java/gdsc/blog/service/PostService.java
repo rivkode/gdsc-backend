@@ -3,15 +3,10 @@ package gdsc.blog.service;
 import gdsc.blog.domain.Post;
 import gdsc.blog.dto.post.WritePostReq;
 import gdsc.blog.repository.PostRepository;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -23,10 +18,18 @@ public class PostService {
 
     @Transactional // 해당 함수 종료시, commit 또는 Rollback 수행 (트랜잭션 관리)
     public Post save(WritePostReq writePostReq) {
-        Post post = Post.builder()
+        return postRepository.save(writePostReqToPost(writePostReq));
+
+//        Post post = Post.builder()
+//                .title(writePostReq.getTitle())
+//                .content(writePostReq.getContent()).build();
+//        return postRepository.save(post);
+    }
+
+    private Post writePostReqToPost(WritePostReq writePostReq) {
+        return Post.builder()
                 .title(writePostReq.getTitle())
                 .content(writePostReq.getContent()).build();
-        return postRepository.save(post);
     }
 
     @Transactional(readOnly = true) // JPA 변경감지(Database의 객체 필드값의 변경을 감지하는 내부 기능) off
