@@ -1,4 +1,4 @@
-package gdsc.blog.dto;
+package gdsc.blog.dto.error;
 
 import lombok.Builder;
 import lombok.Getter;

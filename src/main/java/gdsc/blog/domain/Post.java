@@ -16,8 +16,7 @@ import javax.persistence.*;
 public class Post {
 
     @Id // PK를 해당 변수로 하겠다는 뜻.
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // 해당 데이터베이스 번호 증가 전략을 따라가겠다 (H2 DB 전략을 따라감)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 해당 데이터베이스 번호 증가 전략을 따라가겠다 (H2 DB 전략을 따라감)
     private Long id;
 
     private String title;
